@@ -21,12 +21,12 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "bshaffer/oauth2-server-php": "v1.3"
+        "bshaffer/oauth2-server-php": "v1.6"
     },
     "autoload": {
         "psr-4": {
             "mobilejazz\\yii2\\oauth2server\\": ""
         }
     },
-    "version":"1.0.3"
+    "version":"2.0.0"
 }

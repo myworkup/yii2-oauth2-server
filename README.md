@@ -17,7 +17,7 @@ php composer.phar require --prefer-dist mobilejazz/yii2-oauth2-server "*"
 or add
 
 ```json
-"mobilejazz/yii2-oauth2-server": "*"
+"mobilejazz/yii2-oauth2-server": "~2.0"
 ```
 
 to the require section of your composer.json.
@@ -27,14 +27,22 @@ To use this extension,  simply add the following code in your application config
 ```php
 'oauth2' => [
     'class' => 'mobilejazz\yii2\oauth2server\Module',
-    'options' => [
-        'token_param_name' => 'accessToken',
-        'access_lifetime' => 3600 * 24
-    ],
+    'class' => 'filsh\yii2\oauth2server\Module',
+    'tokenParamName' => 'accessToken',
+    'tokenAccessLifetime' => 3600 * 24,
     'storageMap' => [
-        'user_credentials' => 'common\models\User'
+        'user_credentials' => 'common\models\User',
+    ],
+    'grantTypes' => [
+        'user_credentials' => [
+            'class' => 'OAuth2\GrantType\UserCredentials',
+        ],
+        'refresh_token' => [
+            'class' => 'OAuth2\GrantType\RefreshToken',
+            'always_issue_new_refresh_token' => true
+        ]
     ]
-],
+]
 ```
 
 ```common\models\User``` - user model implementing an interface ```\OAuth2\Storage\UserCredentialsInterface```, so the oauth2 credentials data stored in user table
