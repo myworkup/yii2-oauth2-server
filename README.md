@@ -17,7 +17,7 @@ php composer.phar require --prefer-dist mobilejazz/yii2-oauth2-server "*"
 or add
 
 ```json
-"mobilejazz/yii2-oauth2-server": "~2.0"
+"mobilejazz/yii2-oauth2-server": "~2.1"
 ```
 
 to the require section of your composer.json.
@@ -27,7 +27,6 @@ To use this extension,  simply add the following code in your application config
 ```php
 'oauth2' => [
     'class' => 'mobilejazz\yii2\oauth2server\Module',
-    'class' => 'filsh\yii2\oauth2server\Module',
     'tokenParamName' => 'accessToken',
     'tokenAccessLifetime' => 3600 * 24,
     'storageMap' => [

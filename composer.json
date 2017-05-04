@@ -6,7 +6,7 @@
     "type": "yii2-extension",
     "license": "MIT",
     "support": {
-        "email": "mtorruella@mobilejazz.com",
+        "email": "info@mobilejazz.com",
         "source": "https://github.com/mobilejazz/yii2-oauth2-server"
     },
     "authors": [
@@ -15,18 +15,18 @@
             "email": "imaliy.filsh@gmail.com"
         },
         {
-            "name": "MobileJazz",
-            "email": "mtorruella@mobilejazz.com"
+            "name": "Mobile Jazz",
+            "email": "info@mobilejazz.com"
         }
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "bshaffer/oauth2-server-php": "v1.6"
+        "bshaffer/oauth2-server-php": "v1.9"
     },
     "autoload": {
         "psr-4": {
             "mobilejazz\\yii2\\oauth2server\\": ""
         }
     },
-    "version":"2.0.2"
+    "version":"2.1.0"
 }
