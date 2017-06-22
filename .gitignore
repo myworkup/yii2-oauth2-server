@@ -14,3 +14,5 @@ nbproject
 Thumbs.db
 *.sublime-project
 *.sublime-workspace
+
+*.iml
