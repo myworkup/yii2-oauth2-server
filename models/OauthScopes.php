@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "oauth_scopes".
  *
- * @property string $scope
+ * @property string  $scope
  * @property integer $is_default
  */
 class OauthScopes extends \yii\db\ActiveRecord
@@ -28,7 +28,7 @@ class OauthScopes extends \yii\db\ActiveRecord
         return [
             [['scope', 'is_default'], 'required'],
             [['is_default'], 'integer'],
-            [['scope'], 'string', 'max' => 2000]
+            [['scope'], 'string', 'max' => 2000],
         ];
     }
 
@@ -38,7 +38,7 @@ class OauthScopes extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'scope' => 'Scope',
+            'scope'      => 'Scope',
             'is_default' => 'Is Default',
         ];
     }
