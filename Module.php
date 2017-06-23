@@ -47,6 +47,10 @@ class Module extends \yii\base\Module
     
     public $i18n;
 
+    public $tokenParamName = 'accessToken';
+
+    public $tokenAccessLifetime = 3600 * 24;
+
     private $_server;
 
     private $_request;
