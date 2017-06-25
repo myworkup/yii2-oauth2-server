@@ -2,11 +2,11 @@
 
 namespace mobilejazz\yii2\oauth2server;
 
-use \Yii;
+use Yii;
 
 /**
  * For example,
- * 
+ *
  * ```php
  * 'oauth2' => [
  *     'class' => 'filsh\yii2\oauth2server\Module',
@@ -36,16 +36,22 @@ use \Yii;
 class Module extends \yii\base\Module
 {
     public $options = [];
-    
+
     public $storageMap = [];
-    
+
     public $storageDefault = 'mobilejazz\yii2\oauth2server\storage\Pdo';
-    
+
     public $grantTypes = [];
-    
+
     public $modelClasses = [];
-    
+
     public $i18n;
+
+    private $server;
+
+    private $request;
+
+    private $models = [];
 
     public $tokenParamName = 'accessToken';
 
@@ -53,10 +59,6 @@ class Module extends \yii\base\Module
 
     private $_server;
 
-    private $_request;
-    
-    private $_models = [];
-    
     /**
      * @inheritdoc
      */
@@ -66,52 +68,58 @@ class Module extends \yii\base\Module
         $this->modelClasses = array_merge($this->getDefaultModelClasses(), $this->modelClasses);
         $this->registerTranslations();
     }
-    
+
     /**
      * Get oauth2 server instance
-     * @param type $force
+     *
+     * @param bool $force
+     *
      * @return \OAuth2\Server
      */
     public function getServer($force = false)
     {
-        if($this->_server === null || $force === true) {
+        if ($this->server === null || $force === true) {
             $storages = $this->createStorages();
             $server = new \OAuth2\Server($storages, $this->options);
-            
-            foreach($this->grantTypes as $name => $options) {
-                if(!isset($storages[$name]) || empty($options['class'])) {
+
+            foreach ($this->grantTypes as $name => $options) {
+                if (!isset($storages[ $name ]) || empty($options['class'])) {
                     throw new \yii\base\InvalidConfigException('Invalid grant types configuration.');
                 }
-                
+
                 $class = $options['class'];
                 unset($options['class']);
-                
+
                 $reflection = new \ReflectionClass($class);
-                $config = array_merge([0 => $storages[$name]], [$options]);
+                $config = array_merge([0 => $storages[ $name ]], [$options]);
 
                 $instance = $reflection->newInstanceArgs($config);
                 $server->addGrantType($instance);
             }
-            
-            $this->_server = $server;
+
+            $this->server = $server;
         }
-        return $this->_server;
+
+        return $this->server;
     }
-    
+
     /**
      * Get oauth2 request instance from global variables
+     *
      * @return \OAuth2\Request
      */
     public function getRequest($force = false)
     {
-        if ($this->_request === null || $force) {
-            $this->_request = \OAuth2\Request::createFromGlobals();
+        if ($this->request === null || $force) {
+            $this->request = \OAuth2\Request::createFromGlobals();
         };
-        return $this->_request;
+
+        return $this->request;
     }
-    
+
     /**
      * Get oauth2 response instance
+     *
      * @return \OAuth2\Response
      */
     public function getResponse()
@@ -121,20 +129,21 @@ class Module extends \yii\base\Module
 
     /**
      * Create storages
-     * @return type
+     *
+     * @return array
      */
     public function createStorages()
     {
         $connection = Yii::$app->getDb();
-        if(!$connection->getIsActive()) {
+        if (!$connection->getIsActive()) {
             $connection->open();
         }
-        
+
         $storages = [];
-        foreach($this->storageMap as $name => $storage) {
-            $storages[$name] = Yii::createObject($storage);
+        foreach ($this->storageMap as $name => $storage) {
+            $storages[ $name ] = Yii::createObject($storage);
         }
-        
+
         $defaults = [
             'access_token',
             'authorization_code',
@@ -144,42 +153,46 @@ class Module extends \yii\base\Module
             'user_credentials',
             'public_key',
             'jwt_bearer',
-            'scope'
+            'scope',
         ];
-        foreach($defaults as $name) {
-            if(!isset($storages[$name])) {
-                $storages[$name] = Yii::createObject($this->storageDefault);
+        foreach ($defaults as $name) {
+            if (!isset($storages[ $name ])) {
+                $storages[ $name ] = Yii::createObject($this->storageDefault);
             }
         }
-        
+
         return $storages;
     }
-    
+
     /**
      * Get object instance of model
+     *
      * @param string $name
-     * @param array $config
+     * @param array  $config
+     *
      * @return ActiveRecord
      */
     public function model($name, $config = [])
     {
-        if(!isset($this->_models[$name])) {
-            $className = $this->modelClasses[ucfirst($name)];
-            $this->_models[$name] = Yii::createObject(array_merge(['class' => $className], $config));
+        if (!isset($this->models[ $name ])) {
+            $className = $this->modelClasses[ ucfirst($name) ];
+            $this->models[ $name ] = Yii::createObject(array_merge(['class' => $className], $config));
         }
-        return $this->_models[$name];
+
+        return $this->models[ $name ];
     }
-    
+
     /**
      * Register translations for this module
-     * @return array
+     *
+     * @return void
      */
     public function registerTranslations()
     {
         Yii::setAlias('@oauth2server', dirname(__FILE__));
         if (empty($this->i18n)) {
             $this->i18n = [
-                'class' => 'yii\i18n\PhpMessageSource',
+                'class'    => 'yii\i18n\PhpMessageSource',
                 'basePath' => '@oauth2server/messages',
             ];
         }
@@ -188,16 +201,17 @@ class Module extends \yii\base\Module
 
     /**
      * Get default model classes
+     *
      * @return array
      */
     protected function getDefaultModelClasses()
     {
         return [
-            'Clients' => 'mobilejazz\yii2\oauth2server\models\OauthClients',
-            'AccessTokens' => 'mobilejazz\yii2\oauth2server\models\OauthAccessTokens',
+            'Clients'            => 'mobilejazz\yii2\oauth2server\models\OauthClients',
+            'AccessTokens'       => 'mobilejazz\yii2\oauth2server\models\OauthAccessTokens',
             'AuthorizationCodes' => 'mobilejazz\yii2\oauth2server\models\OauthAuthorizationCodes',
-            'RefreshTokens' => 'mobilejazz\yii2\oauth2server\models\OauthRefreshTokens',
-            'Scopes' => 'mobilejazz\yii2\oauth2server\models\OauthScopes',
+            'RefreshTokens'      => 'mobilejazz\yii2\oauth2server\models\OauthRefreshTokens',
+            'Scopes'             => 'mobilejazz\yii2\oauth2server\models\OauthScopes',
         ];
     }
 }

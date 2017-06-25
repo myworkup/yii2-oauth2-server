@@ -2,7 +2,7 @@
 
 namespace mobilejazz\yii2\oauth2server\filters\auth;
 
-use \Yii;
+use Yii;
 
 class CompositeAuth extends \yii\filters\auth\CompositeAuth
 {

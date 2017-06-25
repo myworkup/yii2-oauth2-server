@@ -14,6 +14,7 @@ class ErrorToExceptionFilter extends \yii\base\Behavior
 
     /**
      * @param ActionEvent $event
+     *
      * @return boolean
      * @throws HttpException when the request method is not allowed.
      */
@@ -22,14 +23,14 @@ class ErrorToExceptionFilter extends \yii\base\Behavior
         $response = Yii::$app->getModule('oauth2')->getServer()->getResponse();
 
         $isValid = true;
-        if($response !== null) {
+        if ($response !== null) {
             $isValid = $response->isInformational() || $response->isSuccessful() || $response->isRedirection();
         }
-        if(!$isValid) {
+        if (!$isValid) {
             $status = $response->getStatusCode();
             // TODO: необходимо также пробрасывать error_uri
             $message = Yii::t('oauth2server', $response->getParameter('error_description'));
-            if($message === null) {
+            if ($message === null) {
                 $message = Yii::t('yii', 'An internal server error occurred.');
             }
             throw new \yii\web\HttpException($status, $message);

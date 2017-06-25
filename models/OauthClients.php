@@ -7,16 +7,16 @@ use Yii;
 /**
  * This is the model class for table "oauth_clients".
  *
- * @property string $client_id
- * @property string $client_secret
- * @property string $redirect_uri
- * @property string $grant_types
- * @property string $scope
- * @property integer $user_id
+ * @property string                    $client_id
+ * @property string                    $client_secret
+ * @property string                    $redirect_uri
+ * @property string                    $grant_types
+ * @property string                    $scope
+ * @property integer                   $user_id
  *
- * @property OauthAccessTokens[] $oauthAccessTokens
+ * @property OauthAccessTokens[]       $oauthAccessTokens
  * @property OauthAuthorizationCodes[] $oauthAuthorizationCodes
- * @property OauthRefreshTokens[] $oauthRefreshTokens
+ * @property OauthRefreshTokens[]      $oauthRefreshTokens
  */
 class OauthClients extends \yii\db\ActiveRecord
 {
@@ -39,7 +39,7 @@ class OauthClients extends \yii\db\ActiveRecord
             [['client_id', 'client_secret'], 'string', 'max' => 32],
             [['redirect_uri'], 'string', 'max' => 1000],
             [['grant_types'], 'string', 'max' => 100],
-            [['scope'], 'string', 'max' => 2000]
+            [['scope'], 'string', 'max' => 2000],
         ];
     }
 
@@ -49,12 +49,12 @@ class OauthClients extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'client_id' => 'Client ID',
+            'client_id'     => 'Client ID',
             'client_secret' => 'Client Secret',
-            'redirect_uri' => 'Redirect Uri',
-            'grant_types' => 'Grant Types',
-            'scope' => 'Scope',
-            'user_id' => 'User ID',
+            'redirect_uri'  => 'Redirect Uri',
+            'grant_types'   => 'Grant Types',
+            'scope'         => 'Scope',
+            'user_id'       => 'User ID',
         ];
     }
 
