@@ -53,6 +53,12 @@ class Module extends \yii\base\Module
 
     private $models = [];
 
+    public $tokenParamName = 'accessToken';
+
+    public $tokenAccessLifetime = 3600 * 24;
+
+    private $_server;
+
     /**
      * @inheritdoc
      */
