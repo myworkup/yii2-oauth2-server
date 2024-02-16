@@ -1,6 +1,6 @@
 <?php
 
-namespace mobilejazz\yii2\oauth2server\models;
+namespace myworkup\yii2\oauth2server\models;
 
 use Yii;
 

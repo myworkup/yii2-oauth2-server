@@ -1,6 +1,6 @@
 <?php
 
-namespace mobilejazz\yii2\oauth2server\storage;
+namespace myworkup\yii2\oauth2server\storage;
 
 use yii\base\InvalidConfigException;
 

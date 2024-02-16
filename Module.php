@@ -1,6 +1,6 @@
 <?php
 
-namespace mobilejazz\yii2\oauth2server;
+namespace myworkup\yii2\oauth2server;
 
 use Yii;
 
@@ -39,7 +39,7 @@ class Module extends \yii\base\Module
 
     public $storageMap = [];
 
-    public $storageDefault = 'mobilejazz\yii2\oauth2server\storage\Pdo';
+    public $storageDefault = 'myworkup\yii2\oauth2server\storage\Pdo';
 
     public $grantTypes = [];
 
@@ -207,11 +207,11 @@ class Module extends \yii\base\Module
     protected function getDefaultModelClasses()
     {
         return [
-            'Clients'            => 'mobilejazz\yii2\oauth2server\models\OauthClients',
-            'AccessTokens'       => 'mobilejazz\yii2\oauth2server\models\OauthAccessTokens',
-            'AuthorizationCodes' => 'mobilejazz\yii2\oauth2server\models\OauthAuthorizationCodes',
-            'RefreshTokens'      => 'mobilejazz\yii2\oauth2server\models\OauthRefreshTokens',
-            'Scopes'             => 'mobilejazz\yii2\oauth2server\models\OauthScopes',
+            'Clients'            => 'myworkup\yii2\oauth2server\models\OauthClients',
+            'AccessTokens'       => 'myworkup\yii2\oauth2server\models\OauthAccessTokens',
+            'AuthorizationCodes' => 'myworkup\yii2\oauth2server\models\OauthAuthorizationCodes',
+            'RefreshTokens'      => 'myworkup\yii2\oauth2server\models\OauthRefreshTokens',
+            'Scopes'             => 'myworkup\yii2\oauth2server\models\OauthScopes',
         ];
     }
 }

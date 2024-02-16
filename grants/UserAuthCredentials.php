@@ -1,6 +1,6 @@
 <?php
 
-namespace mobilejazz\yii2\oauth2server\grants;
+namespace myworkup\yii2\oauth2server\grants;
 
 use OAuth2\Storage\ClientCredentialsInterface;
 use OAuth2\Storage\UserCredentialsInterface;

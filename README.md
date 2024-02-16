@@ -11,13 +11,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 Either run
 
 ```
-php composer.phar require --prefer-dist mobilejazz/yii2-oauth2-server "*"
+php composer.phar require --prefer-dist myworkup/yii2-oauth2-server "*"
 ```
 
 or add
 
 ```json
-"mobilejazz/yii2-oauth2-server": "~2.1"
+"myworkup/yii2-oauth2-server": "~2.1"
 ```
 
 to the require section of your composer.json.
@@ -26,7 +26,7 @@ To use this extension,  simply add the following code in your application config
 
 ```php
 'oauth2' => [
-    'class' => 'mobilejazz\yii2\oauth2server\Module',
+    'class' => 'myworkup\yii2\oauth2server\Module',
     'tokenParamName' => 'accessToken',
     'tokenAccessLifetime' => 3600 * 24,
     'storageMap' => [
@@ -49,7 +49,7 @@ To use this extension,  simply add the following code in your application config
 The next step your shold run migration
 
 ```php
-yii migrate --migrationPath=@vendor/mobilejazz/yii2-oauth2-server/migrations
+yii migrate --migrationPath=@vendor/myworkup/yii2-oauth2-server/migrations
 ```
 
 this migration create the oauth2 database scheme and insert test user credentials ```testclient:testpass``` for ```http://fake/```
@@ -74,8 +74,8 @@ To use this extension,  simply add the behaviors for your base controller:
 use yii\helpers\ArrayHelper;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
-use mobilejazz\yii2\oauth2server\filters\ErrorToExceptionFilter;
-use mobilejazz\yii2\oauth2server\filters\auth\CompositeAuth;
+use myworkup\yii2\oauth2server\filters\ErrorToExceptionFilter;
+use myworkup\yii2\oauth2server\filters\auth\CompositeAuth;
 
 class Controller extends \yii\rest\Controller
 {

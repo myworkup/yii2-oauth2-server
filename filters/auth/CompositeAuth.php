@@ -1,6 +1,6 @@
 <?php
 
-namespace mobilejazz\yii2\oauth2server\filters\auth;
+namespace myworkup\yii2\oauth2server\filters\auth;
 
 use Yii;
 

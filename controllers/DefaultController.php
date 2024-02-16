@@ -1,10 +1,10 @@
 <?php
 
-namespace mobilejazz\yii2\oauth2server\controllers;
+namespace myworkup\yii2\oauth2server\controllers;
 
-use mobilejazz\yii2\oauth2server\filters\auth\CompositeAuth;
-use mobilejazz\yii2\oauth2server\filters\ErrorToExceptionFilter;
-use mobilejazz\yii2\oauth2server\models\OauthAccessTokens;
+use myworkup\yii2\oauth2server\filters\auth\CompositeAuth;
+use myworkup\yii2\oauth2server\filters\ErrorToExceptionFilter;
+use myworkup\yii2\oauth2server\models\OauthAccessTokens;
 use Yii;
 use yii\helpers\ArrayHelper;
 
